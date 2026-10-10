@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<title>@нелсон — bio</title>
+<meta name="description" content="Designer · Creator · Building digital products">
+
+<!-- OG-теги для превью в Telegram. Telegram НЕ выполняет JS, поэтому значения ниже нужно править вручную (см. ГАЙД). -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="@нелсон — bio">
+<meta property="og:description" content="Designer · Creator · Building digital products">
+<meta property="og:image" content="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fb7%2F59%2F6e%2Fb7596e28fd030ff4ba896c84bb8f9189.jpg%3Fnii%3Dt&f=1&nofb=1&ipt=77b2b48b0f40c5cc08676ecce2bd2b2d182bdcb6b04c25f1d8c9b77a21c5e25b&ipo=images">
+<meta name="twitter:card" content="summary">
+
+<!-- Favicon 🖤 -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🖤%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Unbounded:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== ЦВЕТА И ШРИФТЫ: меняются здесь ===== */
+:root {
+  --bg: #000000;
+  --bg2: #0A0A0A;
+  --text: #FFFFFF;
+  --muted: #A1A1A1;
+  --line: #1F1F1F;
+  --line2: #2A2A2A;
+  --glass: rgba(255,255,255,0.03);
+  --glass-border: rgba(255,255,255,0.08);
+  --radius: 14px;
+  --max: 480px;
+  --font-head: 'Unbounded', 'Space Grotesk', Arial, sans-serif;
+  --font-text: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100vh; min-height: 100dvh;
+  font-family: var(--font-text); color: var(--text); line-height: 1.5;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%) fixed;
+  overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 1px solid #fff; outline-offset: 3px; }
+::selection { background: #fff; color: #000; }
+
+/* ===== ФОНОВЫЕ ЭФФЕКТЫ ===== */
+.bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+          mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+}
+.bg-glow {
+  position: absolute; top: 50%; left: 50%;
+  width: 150vmax; height: 150vmax; margin: -75vmax 0 0 -75vmax;
+  background:
+    radial-gradient(circle at 38% 42%, #fff 0, transparent 22%),
+    radial-gradient(circle at 64% 60%, #fff 0, transparent 18%);
+  opacity: 0.05;
+  animation: rotate 30s linear infinite;
+}
+@keyframes rotate { to { transform: rotate(360deg); } }
+
+.particles { position: absolute; inset: 0; }
+.particles .p {
+  position: absolute; color: #fff; opacity: 0.05; line-height: 1; user-select: none;
+  animation: drift var(--d, 30s) ease-in-out var(--dl, 0s) infinite alternate;
+}
+@keyframes drift {
+  from { transform: translate(0, 0); opacity: 0.05; }
+  to   { transform: translate(var(--dx, 40px), var(--dy, -60px)); opacity: 0.15; }
+}
+
+.noise {
+  position: fixed; inset: 0; z-index: 3; pointer-events: none; opacity: 0.07;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+.cursor-glow {
+  position: fixed; top: 0; left: 0; width: 500px; height: 500px; z-index: 1; pointer-events: none;
+  border-radius: 50%; opacity: 0; transition: opacity 0.6s;
+  background: radial-gradient(circle, rgba(255,255,255,0.09), transparent 62%);
+  will-change: transform;
+}
+
+/* ===== КОНТЕНТ ===== */
+.wrap { position: relative; z-index: 2; width: 100%; max-width: var(--max); margin: 0 auto; padding: 64px 20px 40px; }
+
+.rise { animation: rise 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--i, 0) * 90ms) backwards; }
+@keyframes rise { from { opacity: 0; transform: translateY(20px); } }
+
+/* Аватар */
+.avatar { position: relative; width: 112px; height: 112px; margin: 0 auto 24px; border-radius: 50%; }
+.avatar img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  filter: grayscale(1) contrast(1.05);
+  border: 1.5px solid rgba(255,255,255,0.85);
+  transition: box-shadow 0.4s, transform 0.4s;
+}
+.avatar:hover img { box-shadow: 0 0 44px rgba(255,255,255,0.35); transform: scale(1.03); }
+.avatar::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  animation: pulse 2.8s ease-out infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
+  100% { box-shadow: 0 0 0 20px rgba(255,255,255,0); }
+}
+
+/* Ник */
+.nick {
+  font-family: var(--font-head); font-weight: 700; text-transform: uppercase; text-align: center;
+  font-size: clamp(1.7rem, 8vw, 2.4rem); letter-spacing: 0.08em; line-height: 1.15;
+  overflow-wrap: anywhere; min-height: 1.2em;
+}
+.caret { display: inline-block; width: 2px; height: 0.9em; margin-left: 4px; background: #fff; vertical-align: -0.08em; animation: blink 1s steps(1) infinite; }
+.caret.off { display: none; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Бейджи */
+.badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 999px;
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  background: var(--glass); border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+}
+.badge svg { width: 12px; height: 12px; color: #fff; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px rgba(255,255,255,0.8); animation: dotpulse 2s ease-in-out infinite; }
+@keyframes dotpulse { 50% { opacity: 0.35; } }
+
+.bio { margin-top: 18px; text-align: center; color: var(--muted); font-size: 14.5px; font-weight: 300; letter-spacing: 0.02em; }
+.views { display: flex; justify-content: center; align-items: center; gap: 7px; margin-top: 14px; font-size: 12px; color: #6b6b6b; letter-spacing: 0.08em; }
+.views svg { width: 14px; height: 14px; }
+
+/* Кнопки соцсетей */
+.links { display: grid; gap: 12px; margin-top: 36px; }
+.link {
+  position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px; width: 100%;
+  padding: 17px 18px; border-radius: var(--radius); text-align: left;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.link.primary { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.22); }
+.link .ico { width: 22px; height: 22px; flex: none; display: grid; place-items: center; }
+.link .ico svg { width: 22px; height: 22px; }
+.link .lbl { flex: 1; font-size: 15px; font-weight: 500; letter-spacing: 0.02em; }
+.link .arr { width: 18px; height: 18px; flex: none; opacity: 0.45; transition: transform 0.3s, opacity 0.3s; }
+.link .arr svg { width: 18px; height: 18px; }
+.link:hover, .link:focus-visible {
+  background-color: #fff; color: #000; transform: translateX(6px); border-color: #fff;
+  box-shadow: 0 0 34px rgba(255,255,255,0.28), 0 10px 30px rgba(0,0,0,0.5);
+}
+.link:hover .arr, .link:focus-visible .arr { opacity: 1; transform: translateX(4px); }
+.link:active { transform: translateX(6px) scale(0.985); }
+.ripple {
+  position: absolute; border-radius: 50%; background: #fff; mix-blend-mode: difference; opacity: 0.5;
+  pointer-events: none; transform: scale(0); animation: rip 0.65s ease-out forwards;
+}
+@keyframes rip { to { transform: scale(1); opacity: 0; } }
+
+.empty {
+  padding: 22px; text-align: center; color: var(--muted); font-size: 14px;
+  border: 1px dashed var(--line2); border-radius: var(--radius);
+}
+
+/* Заголовки секций */
+.sec {
+  display: flex; align-items: center; gap: 14px; margin: 48px 0 18px; color: var(--muted);
+  font: 600 11px/1 var(--font-head); letter-spacing: 0.28em; text-transform: uppercase;
+}
+.sec::after { content: ""; flex: 1; height: 1px; background: var(--line2); }
+
+/* Discord-виджет */
+.dc {
+  padding: 16px; border-radius: var(--radius);
+  background: var(--glass); border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+.dc-top { display: flex; align-items: center; gap: 14px; }
+.dc-av { position: relative; width: 48px; height: 48px; flex: none; }
+.dc-av img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; filter: grayscale(1); border: 1px solid rgba(255,255,255,0.3); }
+.dc-st { position: absolute; right: -2px; bottom: -2px; width: 14px; height: 14px; border-radius: 50%; border: 3px solid #0A0A0A; background: #fff; box-sizing: content-box; width: 8px; height: 8px; }
+.dc-st.idle { background: transparent; box-shadow: inset 0 0 0 1.5px #fff; }
+.dc-st.dnd { background: #777; }
+.dc-st.offline { background: #333; }
+.dc-info { flex: 1; min-width: 0; }
+.dc-name { font-weight: 600; font-size: 15px; letter-spacing: 0.02em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dc-tag { font-size: 12.5px; color: var(--muted); }
+.dc-copy {
+  width: 38px; height: 38px; flex: none; display: grid; place-items: center; border-radius: 10px;
+  border: 1px solid var(--glass-border); color: var(--muted); transition: 0.25s;
+}
+.dc-copy svg { width: 16px; height: 16px; }
+.dc-copy:hover { background: #fff; color: #000; border-color: #fff; }
+.dc-act {
+  display: flex; align-items: center; gap: 10px; margin-top: 14px; padding-top: 14px;
+  border-top: 1px solid var(--line2); font-size: 12.5px; color: var(--muted);
+}
+.dc-act svg { width: 16px; height: 16px; color: #fff; flex: none; }
+.dc-act b { color: #fff; font-weight: 500; }
+
+/* Проекты */
+.projects { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.proj {
+  position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 3; border-radius: var(--radius);
+  border: 1px solid var(--glass-border); background: #0A0A0A;
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+.proj img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(1) contrast(1.05) brightness(0.8);
+  transition: filter 0.6s, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.proj:hover { border-color: rgba(255,255,255,0.4); box-shadow: 0 0 30px rgba(255,255,255,0.12); }
+.proj:hover img { filter: grayscale(0) contrast(1) brightness(1); transform: scale(1.07); }
+.proj-cap {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 36px 12px 11px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+}
+.proj-cap b { display: block; font: 600 11px/1.2 var(--font-head); letter-spacing: 0.08em; text-transform: uppercase; }
+.proj-cap span { display: block; margin-top: 4px; font-size: 11.5px; color: var(--muted); }
+
+/* Footer */
+.foot { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line2); text-align: center; color: #6b6b6b; font-size: 12px; letter-spacing: 0.06em; }
+
+/* Toast */
+.toast {
+  position: fixed; right: 20px; bottom: 20px; z-index: 100; padding: 11px 18px; border-radius: 10px;
+  background: #fff; color: #000; font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+  box-shadow: 0 10px 40px rgba(255,255,255,0.15); border: 1px solid #000;
+  opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity 0.3s, transform 0.3s;
+}
+.toast.show { opacity: 1; transform: none; }
+
+noscript { position: relative; z-index: 2; display: block; padding: 40px 20px; text-align: center; color: var(--muted); }
+
+@media (min-width: 520px) { .wrap { padding-top: 84px; } .avatar { width: 124px; height: 124px; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- СЕКЦИЯ: Фоновые эффекты -->
+<div class="bg" aria-hidden="true">
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div class="particles" id="particles"></div>
+</div>
+<div class="noise" aria-hidden="true"></div>
+
+<!-- СЕКЦИЯ: Профиль (рендерится из CONFIG) -->
+<main class="wrap" id="app"></main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<noscript>Для отображения страницы включите JavaScript.</noscript>
+
+<script>
+/* =====================================================================
+   CONFIG — ВСЁ МЕНЯЕТСЯ ЗДЕСЬ. HTML трогать не нужно.
+   ===================================================================== */
+const CONFIG = {
+  username: "lroqal",
+  displayName: "@нелсон",
+  bio: "Designer · Creator · Building digital products",
+  avatar: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fb7%2F59%2F6e%2Fb7596e28fd030ff4ba896c84bb8f9189.jpg%3Fnii%3Dt&f=1&nofb=1&ipt=77b2b48b0f40c5cc08676ecce2bd2b2d182bdcb6b04c25f1d8c9b77a21c5e25b&ipo=images",
+  badges: ["online", "owner", "verified"],   // online | premium | verified (любой другой текст тоже покажется)
+  views: 4807,
+  showViews: true,
+  cursorGlow: true,                             // мягкое белое свечение за курсором
+
+  // Discord-плашка. enabled: false — скрыть
+  discord: {
+    enabled: true,
+    name: "@nelson",
+    tag: "l3koe",
+    status: "online",                           // online | idle | dnd | offline
+    activity: "Figma"                           // пусто "" — скрыть строку «играет в…»
+  },
+
+  // type: telegram | telegram-chat | vk | discord | youtube | tiktok | instagram | github | website
+  // url — открыть ссылку, copy — скопировать текст в буфер, primary: true — выделенная кнопка
+  socials: [
+    { type: "telegram",      label: "Telegram канал", url: "https://t.me/lroqal1", primary: true },
+    { type: "telegram-chat", label: "Написать мне",   url: "https://t.me/lroqal" },
+    { type: "vk",            label: "ВКонтакте",      url: "https://vk.com/l3koe" },
+    { type: "discord",       label: "Discord",        copy: "l3koe" },
+    { type: "tiktok",        label: "TikTok",         url: "https://tiktok.com/@lroqal" },
+    { type: "github",        label: "GitHub",         url: "https://github.com/lroqal0206-source" },
+    { type: "website",       label: "Мой сайт",       url: "https://example.com" }
+  ],
+
+  projectsTitle: "Мои проекты",
+  projects: [
+    { title: "Project Alpha", desc: "Short description", url: "https://example.com", img: "https://picsum.photos/seed/alpha/400/300" },
+    { title: "Project Beta",  desc: "Short description", url: "https://example.com", img: "https://picsum.photos/seed/beta/400/300" },
+    { title: "Project Gamma", desc: "Short description", url: "https://example.com", img: "https://picsum.photos/seed/gamma/400/300" },
+    { title: "Project Delta", desc: "Short description", url: "https://example.com", img: "https://picsum.photos/seed/delta/400/300" }
+  ],
+
+  footerText: "© 2026 · made with 🖤"
+};
+
+/* =====================================================================
+   ДАЛЬШЕ — ЛОГИКА. Обычно менять не нужно.
+   ===================================================================== */
+(function () {
+  'use strict';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = window.matchMedia('(hover: hover)').matches;
+
+  /* ----- Иконки (inline SVG, тонкая обводка) ----- */
+  const svg = (inner) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
+  const ICONS = {
+    telegram: svg('<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>'),
+    'telegram-chat': svg('<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>'),
+    vk: svg('<rect x="2.5" y="2.5" width="19" height="19" rx="5"/><text x="12" y="15.6" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" font-weight="700" fill="currentColor" stroke="none">VK</text>'),
+    discord: svg('<path d="M8 7.5c1.3-.5 2.6-.8 4-.8s2.7.3 4 .8"/><path d="M6.2 17.5C5 14.5 4.6 11 5.2 8c1-1.5 2.2-2.6 3.8-3.2l.6 1.3"/><path d="M17.8 17.5c1.2-3 1.6-6.5 1-9.5-1-1.5-2.2-2.6-3.8-3.2l-.6 1.3"/><path d="M6.2 17.5c1.9 1.4 3.8 2 5.8 2s3.9-.6 5.8-2"/><circle cx="9.2" cy="12.5" r="1.2"/><circle cx="14.8" cy="12.5" r="1.2"/>'),
+    youtube: svg('<path d="M2.5 17a24.1 24.1 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.6 49.6 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.6 49.6 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/>'),
+    tiktok: svg('<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>'),
+    instagram: svg('<rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4z"/><path d="M17.5 6.5h.01"/>'),
+    github: svg('<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.1-1.3-.3-2.5-1-3.5.3-1.1.3-2.4 0-3.5 0 0-1 0-3 1.5-2.6-.5-5.4-.5-8 0C6 2 5 2 5 2c-.3 1.1-.3 2.4 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.4.5-.7 1.1-.9 1.7-.2.6-.2 1.2-.1 1.8v4"/><path d="M9 18c-4.5 2-5-2-7-2"/>'),
+    website: svg('<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'),
+    copy: svg('<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'),
+    arrow: svg('<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>'),
+    eye: svg('<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'),
+    check: svg('<path d="M20 6 9 17l-5-5"/>'),
+    star: svg('<path d="M12 3l2.4 5.6L20 9.5l-4.4 3.9L17 19l-5-3-5 3 1.4-5.6L4 9.5l5.6-.9z"/>'),
+    pad: svg('<path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/><rect x="2" y="6" width="20" height="12" rx="6"/>')
+  };
+
+  /* ----- Помощники ----- */
+  function el(tag, props) {
+    const n = document.createElement(tag);
+    props = props || {};
+    for (const k in props) {
+      if (k === 'class') n.className = props[k];
+      else if (k === 'html') n.innerHTML = props[k];
+      else n.setAttribute(k, props[k]);
+    }
+    for (let i = 2; i < arguments.length; i++) {
+      const c = arguments[i];
+      if (c !== null && c !== undefined && c !== false) n.append(c);
+    }
+    return n;
+  }
+  const safeUrl = (u) => (/^(https?:|tg:|mailto:)/i.test(u || '') ? u : '#');
+  let order = 0;
+  const rise = (n) => { n.classList.add('rise'); n.style.setProperty('--i', order++); return n; };
+
+  function setMeta(attr, key, val) {
+    let m = document.head.querySelector('meta[' + attr + '="' + key + '"]');
+    if (!m) { m = document.createElement('meta'); m.setAttribute(attr, key); document.head.appendChild(m); }
+    m.setAttribute('content', val);
+  }
+
+  /* ----- Toast + копирование ----- */
+  let toastTimer;
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+  }
+  async function copyText(text) {
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; }
+    catch (e) {
+      try {
+        const ta = el('textarea', { style: 'position:fixed;opacity:0;top:0;left:0' });
+        ta.value = text; document.body.append(ta); ta.select();
+        ok = document.execCommand('copy'); ta.remove();
+      } catch (e2) { ok = false; }
+    }
+    toast(ok ? 'Copied' : 'Copy failed');
+  }
+
+  /* ----- Ripple ----- */
+  function ripple(e) {
+    const b = e.currentTarget, r = b.getBoundingClientRect(), d = Math.max(r.width, r.height) * 2;
+    const s = el('span', { class: 'ripple' });
+    s.style.cssText = 'width:' + d + 'px;height:' + d + 'px;left:' + (e.clientX - r.left - d / 2) + 'px;top:' + (e.clientY - r.top - d / 2) + 'px';
+    b.append(s);
+    setTimeout(() => s.remove(), 700);
+  }
+
+  /* ----- Печатающийся ник ----- */
+  function typeText(node, text) {
+    const chars = Array.from(text);
+    if (reduce) { node.textContent = text; return Promise.resolve(); }
+    node.textContent = '';
+    return new Promise((resolve) => {
+      let i = 0;
+      setTimeout(function tick() {
+        node.textContent = chars.slice(0, ++i).join('');
+        if (i < chars.length) setTimeout(tick, 95); else resolve();
+      }, 650);
+    });
+  }
+
+  /* ----- Счётчик просмотров ----- */
+  function countUp(node, to) {
+    const fmt = (n) => n.toLocaleString('en-US') + ' views';
+    if (reduce) { node.textContent = fmt(to); return; }
+    const t0 = performance.now(), dur = 1400;
+    (function step(t) {
+      const p = Math.min((t - t0) / dur, 1);
+      node.textContent = fmt(Math.round((1 - Math.pow(1 - p, 3)) * to));
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  /* ----- Рендер ----- */
+  const app = document.getElementById('app');
+  const name = CONFIG.displayName || CONFIG.username || 'Profile';
+  const fallbackAvatar = 'https://placehold.co/300x300/0A0A0A/FFFFFF?text=' + encodeURIComponent((name[0] || '?').toUpperCase());
+
+  document.title = name + ' — bio';
+  setMeta('property', 'og:title', name + ' — bio');
+  setMeta('property', 'og:description', CONFIG.bio || '');
+  setMeta('property', 'og:image', CONFIG.avatar || '');
+  setMeta('name', 'description', CONFIG.bio || '');
+
+  // Аватар
+  const avImg = el('img', { src: CONFIG.avatar || fallbackAvatar, alt: name, width: 124, height: 124 });
+  avImg.addEventListener('error', () => { avImg.src = fallbackAvatar; }, { once: true });
+  app.append(rise(el('div', { class: 'avatar' }, avImg)));
+
+  // Ник
+  const nickText = el('span', { class: 'nick-text' });
+  const caret = el('span', { class: 'caret' });
+  const h1 = el('h1', { class: 'nick', 'aria-label': name }, nickText, caret);
+  app.append(rise(h1));
+  typeText(nickText, name).then(() => setTimeout(() => caret.classList.add('off'), 1800));
+
+  // Бейджи
+  const BADGE = {
+    online:   () => el('span', { class: 'dot' }),
+    premium:  () => el('span', { html: ICONS.star }),
+    verified: () => el('span', { html: ICONS.check })
+  };
+  if (Array.isArray(CONFIG.badges) && CONFIG.badges.length) {
+    const box = el('div', { class: 'badges' });
+    CONFIG.badges.forEach((b) => {
+      const key = String(b).toLowerCase();
+      const icon = BADGE[key] ? BADGE[key]() : el('span', { class: 'dot' });
+      box.append(el('span', { class: 'badge' }, icon, String(b).toUpperCase()));
+    });
+    app.append(rise(box));
+  }
+
+  // Био
+  if (CONFIG.bio) app.append(rise(el('p', { class: 'bio' }, CONFIG.bio)));
+
+  // Просмотры
+  if (CONFIG.showViews) {
+    const vt = el('span', {});
+    app.append(rise(el('div', { class: 'views' }, el('span', { html: ICONS.eye }), vt)));
+    countUp(vt, Number(CONFIG.views) || 0);
+  }
+
+  // Соцсети
+  const list = el('nav', { class: 'links', 'aria-label': 'Social links' });
+  (CONFIG.socials || []).forEach((s) => {
+    const icon = ICONS[s.type] || ICONS.website;
+    const isCopy = !s.url && s.copy;
+    const kids = [
+      el('span', { class: 'ico', html: icon }),
+      el('span', { class: 'lbl' }, s.label || s.type),
+      el('span', { class: 'arr', html: isCopy ? ICONS.copy : ICONS.arrow })
+    ];
+    const cls = 'link' + (s.primary ? ' primary' : '');
+    let node;
+    if (s.url) {
+      node = el('a', { class: cls, href: safeUrl(s.url), target: '_blank', rel: 'noopener' }, ...kids);
+    } else if (s.copy) {
+      node = el('button', { class: cls, type: 'button', 'aria-label': (s.label || s.type) + ': copy' }, ...kids);
+      node.addEventListener('click', () => copyText(s.copy));
+    } else return;
+    node.addEventListener('pointerdown', ripple);
+    list.append(rise(node));
+  });
+  if (!list.children.length) {
+    list.append(rise(el('div', { class: 'empty' }, 'Добавь ссылки в CONFIG')));
+  }
+  app.append(list);
+
+  // Discord-виджет
+  const dc = CONFIG.discord;
+  if (dc && dc.enabled && dc.tag) {
+    const status = ['online', 'idle', 'dnd', 'offline'].includes(dc.status) ? dc.status : 'online';
+    const dcImg = el('img', { src: CONFIG.avatar || fallbackAvatar, alt: '' });
+    dcImg.addEventListener('error', () => { dcImg.src = fallbackAvatar; }, { once: true });
+    const copyBtn = el('button', { class: 'dc-copy', type: 'button', 'aria-label': 'Copy Discord tag', html: ICONS.copy });
+    copyBtn.addEventListener('click', () => copyText(dc.tag));
+    const card = el('div', { class: 'dc' },
+      el('div', { class: 'dc-top' },
+        el('div', { class: 'dc-av' }, dcImg, el('span', { class: 'dc-st ' + status })),
+        el('div', { class: 'dc-info' }, el('div', { class: 'dc-name' }, dc.name || name), el('div', { class: 'dc-tag' }, dc.tag)),
+        copyBtn
+      ),
+      dc.activity ? el('div', { class: 'dc-act' }, el('span', { html: ICONS.pad }), el('span', {}, 'Playing ', el('b', {}, dc.activity))) : null
+    );
+    app.append(rise(el('div', { class: 'sec' }, 'Discord')), rise(card));
+  }
+
+  // Проекты
+  if (Array.isArray(CONFIG.projects) && CONFIG.projects.length) {
+    const grid = el('div', { class: 'projects' });
+    CONFIG.projects.forEach((p) => {
+      const img = el('img', { src: p.img || 'https://placehold.co/400x300/0A0A0A/FFFFFF?text=Project', alt: p.title || '', loading: 'lazy' });
+      img.addEventListener('error', () => { img.src = 'https://placehold.co/400x300/0A0A0A/FFFFFF?text=Project'; }, { once: true });
+      const cap = el('div', { class: 'proj-cap' }, el('b', {}, p.title || ''), p.desc ? el('span', {}, p.desc) : null);
+      const card = p.url
+        ? el('a', { class: 'proj', href: safeUrl(p.url), target: '_blank', rel: 'noopener' }, img, cap)
+        : el('div', { class: 'proj' }, img, cap);
+      grid.append(card);
+    });
+    app.append(rise(el('div', { class: 'sec' }, CONFIG.projectsTitle || 'Projects')), rise(grid));
+  }
+
+  // Footer
+  if (CONFIG.footerText) app.append(rise(el('footer', { class: 'foot' }, CONFIG.footerText)));
+
+  /* ----- Плавающие + и точки ----- */
+  const pbox = document.getElementById('particles');
+  const glyphs = ['+', '+', '+', '·', '•'];
+  const count = window.innerWidth < 600 ? 18 : 30;
+  for (let i = 0; i < count; i++) {
+    const p = el('span', { class: 'p' }, glyphs[Math.floor(Math.random() * glyphs.length)]);
+    p.style.left = (Math.random() * 100).toFixed(1) + '%';
+    p.style.top = (Math.random() * 100).toFixed(1) + '%';
+    p.style.fontSize = (10 + Math.random() * 8).toFixed(0) + 'px';
+    p.style.setProperty('--d', (22 + Math.random() * 28).toFixed(1) + 's');
+    p.style.setProperty('--dl', (-Math.random() * 30).toFixed(1) + 's');
+    p.style.setProperty('--dx', ((Math.random() - 0.5) * 120).toFixed(0) + 'px');
+    p.style.setProperty('--dy', ((Math.random() - 0.5) * 140).toFixed(0) + 'px');
+    pbox.append(p);
+  }
+
+  /* ----- Свечение за курсором ----- */
+  if (CONFIG.cursorGlow && canHover && !reduce) {
+    const g = el('div', { class: 'cursor-glow' });
+    document.body.append(g);
+    let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y;
+    window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; g.style.opacity = 1; }, { passive: true });
+    document.addEventListener('mouseleave', () => { g.style.opacity = 0; });
+    (function loop() {
+      x += (tx - x) * 0.12; y += (ty - y) * 0.12;
+      g.style.transform = 'translate(' + (x - 250).toFixed(1) + 'px,' + (y - 250).toFixed(1) + 'px)';
+      requestAnimationFrame(loop);
+    })();
+  }
+})();
+</script>
+
+</body>
+</html>
+
+<!--
+ГАЙД ПО ИСПОЛЬЗОВАНИЮ
+
+1. КАК ОТКРЫТЬ В VS CODE И ЗАПУСТИТЬ ЧЕРЕЗ LIVE SERVER
+   - Создайте пустую папку и сохраните код в файл bio.html (для деплоя его нужно будет переименовать в index.html).
+   - VS Code: Файл, Открыть папку, выберите эту папку.
+   - Расширения (Ctrl+Shift+X): найдите и установите "Live Server" (автор Ritwick Dey).
+   - Правый клик по bio.html, "Open with Live Server". Страница обновляется при каждом сохранении (Ctrl+S).
+   - Можно и просто открыть файл двойным кликом, всё работает без сервера. Нужен только интернет для шрифтов и картинок.
+
+2. КАК ПОМЕНЯТЬ НИК, АВАТАР, ОПИСАНИЕ, СОЦСЕТИ
+   Всё находится в объекте CONFIG в начале тега script. HTML трогать не нужно.
+   - displayName: ник, который отображается крупно (печатается по буквам). username: служебное имя.
+   - bio: строка описания под бейджами.
+   - avatar: ссылка на фото. Своё фото положите рядом с файлом и напишите avatar: "avatar.jpg". Цветное фото автоматически станет чёрно-белым.
+   - badges: список бейджей. Доступны "online", "premium", "verified". Любой другой текст тоже отобразится капсулой. Пустой список [] скроет бейджи.
+   - views и showViews: число просмотров и его включение/отключение. Важно: это просто красивое число из CONFIG, а не настоящий счётчик. Для реальной статистики подключите внешний сервис (например Plausible или Umami) отдельным тегом script.
+   - cursorGlow: true или false, свечение за курсором (на телефонах отключается само).
+   - discord: данные Discord-плашки (name, tag, status: online/idle/dnd/offline, activity: во что играете). enabled: false скрывает плашку.
+   - footerText: текст в подвале.
+
+3. КАК ДОБАВИТЬ ИЛИ УДАЛИТЬ ССЫЛКИ
+   - Кнопки находятся в массиве socials. Каждая строка это одна кнопка. Удалить кнопку: удалите строку целиком. Добавить: скопируйте любую строку и измените значения. Порядок кнопок совпадает с порядком строк.
+   - Поля: type (иконка), label (текст на кнопке), url (ссылка) или copy (текст, который копируется в буфер, как у Discord), primary: true (выделенная кнопка).
+   - Доступные type: telegram, telegram-chat, vk, discord, youtube, tiktok, instagram, github, website. Для неизвестного type будет иконка глобуса.
+   - Если массив socials пустой, на странице появится заглушка "Добавь ссылки в CONFIG".
+   - Проекты: массив projects, поля title, desc, url, img. Показываются сеткой 2 в ряд. Пустой массив скрывает секцию. Название секции: projectsTitle.
+   - Ссылки принимаются только с http://, https://, tg:// и mailto:, всё остальное заменяется на "#".
+
+4. КАК ЗАДЕПЛОИТЬ (БЕСПЛАТНО)
+   GitHub Pages:
+   - Создайте репозиторий на github.com и загрузите в него файл, переименовав его в index.html (вместе с картинками, если они свои).
+   - Откройте Settings, затем Pages. В Source выберите ветку main и папку root, нажмите Save.
+   - Через 1-2 минуты сайт откроется по адресу https://ВАШ_ЛОГИН.github.io/ИМЯ_РЕПОЗИТОРИЯ/
+   Netlify:
+   - Переименуйте файл в index.html и положите его в папку.
+   - Откройте app.netlify.com/drop и перетащите папку в окно браузера.
+   - Сайт сразу получит адрес вида https://имя.netlify.app (имя можно изменить в Site configuration, затем Change site name).
+
+5. ПРЕВЬЮ ССЫЛКИ В TELEGRAM (OG-ТЕГИ)
+   Бот Telegram читает только статичный HTML и не выполняет JavaScript. Поэтому для красивой карточки при отправке ссылки отредактируйте теги meta в блоке head вручную: og:title, og:description и og:image. В og:image нужна полная публичная ссылка (https://...) на картинку, лучше квадратную или 1200x630. После изменений обновить кэш превью можно, написав боту @WebpageBot ссылку на вашу страницу.
+
+6. КАК КУПИТЬ ДОМЕН И ПРИВЯЗАТЬ
+   - Купите домен у регистратора (Namecheap, Porkbun, Cloudflare Registrar, Reg.ru и другие). Короткие зоны вроде .me, .lol, .bio, .xyz обычно стоят недорого, цену смотрите при покупке.
+   Привязка к GitHub Pages:
+   - В репозитории: Settings, Pages, поле Custom domain, введите домен, Save.
+   - В DNS-панели регистратора добавьте для основного домена четыре A-записи: 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153. Для www добавьте запись CNAME на ВАШ_ЛОГИН.github.io.
+   - Через несколько минут (иногда до пары часов) включите галочку Enforce HTTPS.
+   Привязка к Netlify:
+   - Site configuration, Domain management, Add a domain, введите домен.
+   - Выберите один из вариантов: сменить nameservers у регистратора на указанные Netlify (самый простой) или добавить записи DNS, которые Netlify покажет на странице домена.
+   - HTTPS-сертификат Netlify выпустит автоматически.
+   Актуальные адреса и шаги всегда сверяйте с документацией GitHub Pages и Netlify, они могут меняться.
+
+7. ГДЕ МЕНЯТЬ ЦВЕТА И ШРИФТЫ
+   - Блок :root в начале тега style. Там задаются цвета фона (bg, bg2), текст (text), серый второстепенный (muted), линии (line, line2), стекло (glass, glass-border), радиус скругления (radius), максимальная ширина (max) и шрифты (font-head, font-text). В коде у этих переменных по два дефиса в начале.
+   - Сила эффектов фона: прозрачность сетки в блоке bg-grid, свечения в блоке bg-glow (opacity), шума в блоке noise (opacity), частиц в keyframes drift.
+   - Количество плавающих плюсиков: переменная count в разделе "Плавающие + и точки" внутри скрипта.
+-->
